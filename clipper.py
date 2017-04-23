@@ -20,7 +20,7 @@ try:
     else:
         print("Invalid label!")
 except:
-    directory=os.getcwd()
+    directory="./data"
 # Window parameters
 window_size=14
 x=y=100                        # default position of the cursor  
