@@ -20,7 +20,7 @@ try:
     else:
         print("Invalid label!")
 except:
-    directory="./data"
+    directory="./data/"
 # Window parameters
 window_size=14
 x=y=100                        # default position of the cursor  
@@ -39,7 +39,7 @@ class Clipper:
     # Catch mouse event or key-press event
     # Clip and save the image
     def __init__(self,ax,img,fileName):
-        # self.cid = plt.figure(1).canvas.mpl_connect('motion_notify_event', self)
+        # Catch events
         self.cod = plt.figure(1).canvas.mpl_connect('scroll_event', self)
         self.cud = plt.figure(1).canvas.mpl_connect('button_press_event', self)
         self.ced = plt.figure(1).canvas.mpl_connect('key_press_event', self)
@@ -48,6 +48,7 @@ class Clipper:
         self.fileName = fileName
 
     def __call__(self, event):
+        # move the box and save the image
         global height_to_width_ratio, width, height
         global crop_img, x, y, step, directory
 
@@ -100,7 +101,7 @@ def clip(fileName):
     plt.xlim(-500,len(img[1]))
     plt.ylim(len(img),0)
     ax.imshow(img)
-
+    # Show the help
     ax.text(-480, 800, '"Left Click": clip the picture', style='italic', bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 6})
     ax.text(-480, 860, '"Direction Keys": move clipping box', style='italic', bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 6})
     ax.text(-480, 920, 'Mouse Wheel: zoom the clipping box', style='italic', bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 6})
@@ -108,11 +109,8 @@ def clip(fileName):
     ax.text(-480, 1040, '"Right Click": save clipped picture', style='italic', bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 6})
     ax.text(-480, 1100, '"q": quit the program', style='italic', bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 6})
     ax.text(-480, 1160, '"e": skip this picture', style='italic', bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 6})
-
     clipper = Clipper(ax,img,fileName)
-
     plt.show()
-
 
 # main ========================================================================
 startFile=raw_input("The file to start with('0' for default): ")
